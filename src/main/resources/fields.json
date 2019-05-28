@@ -1,0 +1,36 @@
+{
+    "input": {
+        "sheet": "sheet1",
+        "fields": [
+            {
+                "name": "inputField1",
+                "cell": "A1"
+            },
+            {
+                "name": "inputField2",
+                "cell": "A2"
+            },
+            {
+                "name": "inputField1",
+                "cell": "A1"
+            }
+        ]
+    },
+    "output": {
+        "sheet": "sheet2",
+        "fields": [
+            {
+                "name": "outputField1",
+                "cell": "A1"
+            },
+            {
+                "name": "outputField2",
+                "cell": "A2"
+            },
+            {
+                "name": "outputField1",
+                "cell": "A1"
+            }
+        ]
+    }
+}

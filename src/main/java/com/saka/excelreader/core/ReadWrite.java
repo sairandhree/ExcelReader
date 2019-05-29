@@ -30,7 +30,7 @@ public class ReadWrite {
 	            XSSFSheet sheet = workbook.getSheetAt(0);
 	            
 	            FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-	           // workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
+	        //   workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
 	           
 	            XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
 	            
@@ -72,7 +72,8 @@ public class ReadWrite {
 				}
 				//file.close();
 				
-				
+	        System.out.println("===========================");
+
 	          
             System.out.println(evaluator.evaluate(sheet2.getRow(1).getCell(1)).getNumberValue());
             System.out.println(evaluator.evaluate(sheet2.getRow(2).getCell(1)).getNumberValue());

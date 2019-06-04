@@ -12,7 +12,7 @@
             },
             {
                 "name": "inputField1",
-                "cell": "A1"
+                "cell": "A3"
             }
         ]
     },
@@ -21,15 +21,15 @@
         "fields": [
             {
                 "name": "outputField1",
-                "cell": "A1"
+                "cell": "2"
             },
             {
                 "name": "outputField2",
-                "cell": "A2"
+                "cell": "3"
             },
             {
                 "name": "outputField1",
-                "cell": "A1"
+                "cell": "4"
             }
         ]
     }

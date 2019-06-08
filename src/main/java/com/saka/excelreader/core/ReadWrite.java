@@ -15,14 +15,18 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
+import com.saka.excelreader.models.InputModel;
+import com.saka.excelreader.models.OutputModel;
+
 
 
 @Component
 public class ReadWrite {
 	
-	public void getData(){
+	public OutputModel getData(InputModel input){
 		//ClassLoader classLoader = new ReadResourceFileDemo().getClass().getClassLoader();
 		File  file = new File(getClass().getClassLoader().getResource("Test.xlsx").getFile());
+		OutputModel out = new OutputModel(0, 0, 0) ;
 		try {
 			FileInputStream  fis = new FileInputStream(file);
 			 XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -35,11 +39,11 @@ public class ReadWrite {
 	            XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
 	            
 	            Cell cell1 = sheet.createRow(2).createCell(1);
-	            cell1.setCellValue(1);
+	            cell1.setCellValue(input.getfield1());
 	            Cell cell2 = sheet.createRow(3).createCell(1);
-	            cell2.setCellValue(2);
+	            cell2.setCellValue(input.getfield2());
 	            Cell cell3 = sheet.createRow(4).createCell(1);
-	            cell3.setCellValue(3);
+	            cell3.setCellValue(input.getfield3());
 	            
 	            //FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 	            //workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
@@ -47,31 +51,7 @@ public class ReadWrite {
 	            
 	            XSSFSheet sheet2 = workbook.getSheetAt(1);
 	            
-	            Iterator<Row> rowIterator = sheet.iterator();
-				while (rowIterator.hasNext()) 
-				{
-					Row row = rowIterator.next();
-					//For each row, iterate through all the columns
-					Iterator<Cell> cellIterator = row.cellIterator();
-					
-					while (cellIterator.hasNext()) 
-					{
-						Cell cell = cellIterator.next();
-						//Check the cell type and format accordingly
-						switch (cell.getCellType()) 
-						{
-							case NUMERIC:
-								System.out.print(cell.getNumericCellValue() + "\t");
-								break;
-							case STRING:
-								System.out.print(cell.getStringCellValue() + "\t");
-								break;
-						}
-					}
-					System.out.println("");
-				}
-				//file.close();
-				
+	         
 				
 	          
             System.out.println(evaluator.evaluate(sheet2.getRow(1).getCell(1)).getNumberValue());
@@ -79,12 +59,17 @@ public class ReadWrite {
             
             System.out.println(evaluator.evaluate(sheet2.getRow(3).getCell(1)).getNumberValue());
             
+             out = new OutputModel( evaluator.evaluate(sheet2.getRow(1).getCell(1)).getNumberValue(), 
+            		evaluator.evaluate(sheet2.getRow(2).getCell(1)).getNumberValue(),
+            		evaluator.evaluate(sheet2.getRow(3).getCell(1)).getNumberValue());
+            
+           
 	            
 		} catch (  IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		 return out;
 		
 	}
 	
@@ -93,7 +78,8 @@ public class ReadWrite {
 	public static void main(String[] args) {
 		ReadWrite rw = new ReadWrite();
 		
-		rw.getData();
+		InputModel input = new InputModel(1, 2, 3);
+		rw.getData(input);
 		
 	}
 
